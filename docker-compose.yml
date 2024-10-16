@@ -1,0 +1,15 @@
+﻿services:             
+    loja-jogos:
+      container_name: loja-jogos
+      hostname: loja-jogos
+      image: geovanesilva/loja-jogos:1.0
+      build:
+       context: .
+      ports:
+       - '5090:8080'
+      deploy:
+        resources:
+          limits:
+            cpus: '0.50'
+            memory: 300M
+      restart: always
