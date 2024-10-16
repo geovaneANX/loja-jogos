@@ -23,8 +23,6 @@ namespace Bootstrap
                         Url = new Uri("https://www.linkedin.com/in/geovane-anx/")
                     }
                 });
-
-                //s.OperationFilter<SwaggerHeaderParams>();
             });
         }
 

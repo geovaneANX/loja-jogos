@@ -8,7 +8,7 @@ namespace Application.Commands
     {
         public PedidosCommand() { }
 
-        public List<PedidosInput> Input { get; set; }
+        public required List<PedidosInput> Input { get; set; }
 
         public object Output { get; set; }
 

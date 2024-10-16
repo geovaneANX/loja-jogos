@@ -2,8 +2,6 @@
 using Infrastructure.Messages;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Api.Controllers
 {

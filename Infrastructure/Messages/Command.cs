@@ -1,6 +1,5 @@
 ﻿using FluentValidation.Results;
 using MediatR;
-using System;
 
 namespace Infrastructure.Messages
 {
