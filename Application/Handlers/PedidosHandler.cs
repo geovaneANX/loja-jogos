@@ -12,22 +12,19 @@ namespace Application.Handlers
     ) :
         IRequestHandler<PedidosCommand, bool>
     {
-        private readonly IPedidosUseCase _useCase = useCase;
-        private readonly IMessagesHandler _messagesHandler = messagesHandler;
-
         public async Task<bool> Handle(PedidosCommand command, CancellationToken cancellationToken)
         {
             if (command.IsValid())
             {
                 var dto = command.Input.MapToDto();
-                var empacotamentoDtos = await _useCase.CaulcularCaixasAsync(dto).ConfigureAwait(false);
+                var empacotamentoDtos = useCase.CaulcularCaixas(dto);
                 command.Output = empacotamentoDtos.MapDtoToOutput();
                 return true;
             }
 
             foreach (var error in command.ValidationResult.Errors)
             {
-                await _messagesHandler.SendDomainNotificationAsync(new DomainNotification
+                await messagesHandler.SendDomainNotificationAsync(new DomainNotification
                 (
                     command.MessageType,
                     error.ErrorMessage

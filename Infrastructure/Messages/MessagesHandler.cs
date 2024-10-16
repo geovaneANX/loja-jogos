@@ -7,10 +7,7 @@ namespace Infrastructure.Messages
     {
         private readonly IMediator _mediator;
 
-        public MessagesHandler(IMediator mediator)
-        {
-            _mediator = mediator;
-        }
+        public MessagesHandler(IMediator mediator) => _mediator = mediator;
 
         public async Task<bool> SendCommandAsync<TCommand>(TCommand command)
             where TCommand : Command

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Infrastructure.Messages
+﻿namespace Infrastructure.Messages
 {
     public abstract class Message
     {

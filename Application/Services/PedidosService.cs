@@ -6,14 +6,14 @@ namespace Application.Services
 {
     public class PedidosService: IPedidosService
     {
-        public Task<List<ResultadoEmpacotamentoDto>> EmpacotarPedidos(List<PedidosDto> pedidos)
+        public Task<List<PedidoOutputDto>> EmpacotarPedidos(List<PedidosDto> pedidos)
         {
-            var resultado = new List<ResultadoEmpacotamentoDto>();
+            var resultado = new List<PedidoOutputDto>();
 
             foreach (var pedido in pedidos)
             {
                 var caixasUsadas = EmpacotarProdutos(pedido.Produtos);
-                resultado.Add(new ResultadoEmpacotamentoDto
+                resultado.Add(new PedidoOutputDto
                 {
                     PedidoId = pedido.Id,
                     Caixas = caixasUsadas
@@ -23,9 +23,9 @@ namespace Application.Services
             return Task.FromResult(resultado);
         }
 
-        private List<CaixaResultadoDto> EmpacotarProdutos(List<Produto> produtos)
+        private static List<PedidoDetalheOutputDto> EmpacotarProdutos(List<Produto> produtos)
         {
-            var caixasUsadas = new List<CaixaResultadoDto>();
+            var caixasUsadas = new List<PedidoDetalheOutputDto>();
 
             // Ordenar produtos por volume, do maior para o menor
             var produtosOrdenados = produtos.OrderByDescending(p => CalcularVolume(p.Dimensoes)).ToList();
@@ -52,7 +52,7 @@ namespace Application.Services
 
                 if (produtosNaCaixa.Count != 0)
                 {
-                    caixasUsadas.Add(new CaixaResultadoDto
+                    caixasUsadas.Add(new PedidoDetalheOutputDto
                     {
                         CaixaId = caixa.CaixaId,
                         Produtos = produtosNaCaixa
@@ -65,7 +65,7 @@ namespace Application.Services
             {
                 foreach (var produto in produtosOrdenados)
                 {
-                    caixasUsadas.Add(new CaixaResultadoDto
+                    caixasUsadas.Add(new PedidoDetalheOutputDto
                     {
                         CaixaId = null,
                         Produtos = [produto.Produto_id],
@@ -91,13 +91,13 @@ namespace Application.Services
             // Tenta todas as combinações de rotação (6 combinações de altura, largura e comprimento)
             var orientacoesProduto = new[]
             {
-            new[] { dimensoesProduto[0], dimensoesProduto[1], dimensoesProduto[2] },
-            new[] { dimensoesProduto[0], dimensoesProduto[2], dimensoesProduto[1] },
-            new[] { dimensoesProduto[1], dimensoesProduto[0], dimensoesProduto[2] },
-            new[] { dimensoesProduto[1], dimensoesProduto[2], dimensoesProduto[0] },
-            new[] { dimensoesProduto[2], dimensoesProduto[0], dimensoesProduto[1] },
-            new[] { dimensoesProduto[2], dimensoesProduto[1], dimensoesProduto[0] }
-        };
+                new[] { dimensoesProduto[0], dimensoesProduto[1], dimensoesProduto[2] },
+                new[] { dimensoesProduto[0], dimensoesProduto[2], dimensoesProduto[1] },
+                new[] { dimensoesProduto[1], dimensoesProduto[0], dimensoesProduto[2] },
+                new[] { dimensoesProduto[1], dimensoesProduto[2], dimensoesProduto[0] },
+                new[] { dimensoesProduto[2], dimensoesProduto[0], dimensoesProduto[1] },
+                new[] { dimensoesProduto[2], dimensoesProduto[1], dimensoesProduto[0] }
+            };
 
             foreach (var orientacao in orientacoesProduto)
             {
@@ -112,9 +112,6 @@ namespace Application.Services
             return false;
         }
 
-        private int CalcularVolume(Dimensoes dimensoes)
-        {
-            return dimensoes.Altura * dimensoes.Largura * dimensoes.Comprimento;
-        }
+        private static int CalcularVolume(Dimensoes dimensoes) => dimensoes.Altura * dimensoes.Largura * dimensoes.Comprimento;
     }
 }

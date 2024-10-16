@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Bootstrap
@@ -11,11 +10,6 @@ namespace Bootstrap
             services.AddInfrastructure(configuration);
             services.AddApplication();
             services.AddSwagger();
-        }
-
-        public static void UseSwaggerGTVe(this IApplicationBuilder builder)
-        {
-            builder.ConfigureSwagger();
         }
     }
 }

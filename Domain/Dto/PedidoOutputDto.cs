@@ -1,8 +1,6 @@
-﻿using Domain.Dto;
-
-namespace Application.Boundaries
+﻿namespace Domain.Dto
 {
-    public class PedidosOutput
+    public class PedidoOutputDto
     {
         public int PedidoId { get; set; }
         public required List<PedidoDetalheOutputDto> Caixas { get; set; }

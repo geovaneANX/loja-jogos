@@ -4,6 +4,6 @@ namespace Application.UseCases.Interface
 {
     public interface IPedidosUseCase
     {
-        Task<List<ResultadoEmpacotamentoDto>> CaulcularCaixasAsync(List<PedidosDto> dto);
+        List<PedidoOutputDto> CaulcularCaixas(List<PedidosDto> dto);
     }
 }

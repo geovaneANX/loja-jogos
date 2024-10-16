@@ -1,8 +1,4 @@
 ﻿using MediatR;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Infrastructure.Messages
 {
@@ -12,7 +8,7 @@ namespace Infrastructure.Messages
 
         public DomainNotificationHandler()
         {
-            _notifications = new List<DomainNotification>();
+            _notifications = [];
         }
 
         public Task Handle(DomainNotification message, CancellationToken cancellationToken)
@@ -28,12 +24,12 @@ namespace Infrastructure.Messages
 
         public virtual bool HasNotifications()
         {
-            return _notifications.Any();
+            return _notifications.Count != 0;
         }
 
         public void Dispose()
         {
-            _notifications = new List<DomainNotification>();
+            _notifications = [];
         }
     }
 }

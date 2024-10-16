@@ -10,7 +10,7 @@ namespace Application.Commands
 
         public required List<PedidosInput> Input { get; set; }
 
-        public object Output { get; set; }
+        public object? Output { get; set; }
 
         public override bool IsValid()
         {

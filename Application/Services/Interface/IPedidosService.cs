@@ -4,6 +4,6 @@ namespace Application.Services.Interface
 {
     public interface IPedidosService
     {
-        Task<List<ResultadoEmpacotamentoDto>> EmpacotarPedidos(List<PedidosDto> pedidos);
+        Task<List<PedidoOutputDto>> EmpacotarPedidos(List<PedidosDto> pedidos);
     }
 }

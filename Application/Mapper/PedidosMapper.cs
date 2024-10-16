@@ -23,7 +23,7 @@ namespace Application.Mapper
             return listDto;
         }
 
-        internal static List<PedidosOutput> MapDtoToOutput(this List<ResultadoEmpacotamentoDto> dto)
+        internal static List<PedidosOutput> MapDtoToOutput(this List<PedidoOutputDto> dto)
         {
             var listOutput = new List<PedidosOutput>();
 
