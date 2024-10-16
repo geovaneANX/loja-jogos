@@ -1,5 +1,8 @@
 # Loja de Jogos
 
+- API que recebe lista de pedidos com produtos e suas dimensões. 
+- Organiza como os produtos devem sem empacotados em caixas com tamanhos pré-definidos.
+
 ### Setup
 Na raiz do projeto, executar os seguintes comandos:
 ```sh
